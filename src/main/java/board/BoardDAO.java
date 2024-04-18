@@ -70,8 +70,7 @@ public class BoardDAO {
 		ResultSet resultSet = null;
 		BoardVO vo = null;
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@nextit.or.kr:1521:xe", "java", "oracle21c");
+			connection = dataSource.getConnection();
 			String sql =
 					"""
 					select
