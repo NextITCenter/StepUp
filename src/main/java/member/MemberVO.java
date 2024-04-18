@@ -11,6 +11,11 @@ public class MemberVO {
 	public MemberVO() {
 	}
 	
+	public MemberVO(String id, String password) {
+		this.id = id;
+		this.password = password;
+	}
+
 	public MemberVO(String id, String name, String password, String email) {
 		this.id = id;
 		this.name = name;

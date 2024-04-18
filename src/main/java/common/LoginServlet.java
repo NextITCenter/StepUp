@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,16 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchId = request.getParameter("id");
 		String searchPassword = request.getParameter("password");
+		boolean saveFlag = Boolean.parseBoolean(request.getParameter("saveId"));
+		Cookie cookie = new Cookie("savedId", searchId);
+		if (saveFlag) {
+			// 쿠키를 생성해서 클라이언트에 보내줌
+			cookie.setMaxAge(60 * 60 * 24 * 365);
+		} else {
+			// 기존의 쿠키를 삭제
+			cookie.setMaxAge(0);
+		}
+		response.addCookie(cookie);
 		
 		// id에 해당하는 데이터를 조회하여 가져온다.
 		Connection connection = null;

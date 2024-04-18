@@ -4,11 +4,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="회원 정보" name="title"/>
 </jsp:include>
-<c:if test="${member.id eq sessionScope.memeber.id}">
 <a href="/member/update?id=${member.id}">수정</a>
 <a href="javascript:deleteItem('/member/delete?id=${member.id}');">삭제</a>
 <a href="/member/password?id=${member.id}">비밀번호 수정</a>
-</c:if>
 <div>
 	ID: ${member.id }
 </div>
