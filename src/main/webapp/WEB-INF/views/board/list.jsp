@@ -8,6 +8,20 @@
 <c:if test="${not empty sessionScope.member}">
 <a href="/board/add">게시글 등록</a>
 </c:if>
+<form action="/board/list" method="get">
+	<label>
+		<select name="searchType">
+			<option>선택</option>
+			<option value="title">제목</option>
+			<option value="content">내용</option>
+			<option value="writer">작성자</option>
+		</select>
+	</label>
+	<label>
+		<input type="text" name="searchWord" placeholder="검색어">
+	</label>
+	<button type="submit">검색</button>
+</form>
 <table>
 	<tr>
 		<th>글번호</th>

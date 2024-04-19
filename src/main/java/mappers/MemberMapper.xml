@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="member.MemberDAO">
-	<select id="getMemberList" resultType="member.MemberVO">
+<mapper namespace="member.MemberMapper">
+	<select id="getMemberList" resultType="memberVO">
 		select
 			id,
 			name,
@@ -12,7 +12,7 @@
 		from
 			member
 	</select>
-	<select id="getMember" parameterType="string" resultType="member.MemberVO">
+	<select id="getMember" parameterType="string" resultType="memberVO">
 		select
 			id,
 			name,
@@ -23,7 +23,7 @@
 		where
 			id = #{id}
 	</select>
-	<select id="currentPassword" parameterType="member.MemberVO">
+	<select id="currentPassword" parameterType="memberVO">
 		select
 			id,
 			name,
@@ -34,13 +34,13 @@
 			id = #{id}
 			and password = #{password}
 	</select>
-	<insert id="insertMember" parameterType="member.MemberVO">
+	<insert id="insertMember" parameterType="memberVO">
 		insert into member
 			(id, name, password, email)
 		values
 			(#{id}, #{name}, #{password}, #{email})
 	</insert>
-	<update id="updateMember" parameterType="member.MemberVO">
+	<update id="updateMember" parameterType="memberVO">
 		update
 			member
 		set
@@ -50,7 +50,7 @@
 		where
 			id = #{id}
 	</update>
-	<update id="changePassword" parameterType="member.MemberVO">
+	<update id="changePassword" parameterType="memberVO">
 		update
 			member
 		set

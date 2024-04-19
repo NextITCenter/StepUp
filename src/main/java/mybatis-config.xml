@@ -4,6 +4,8 @@
 <configuration>
 	<properties resource="db.properties"></properties>
 	<typeAliases>
+		<typeAlias type="common.SearchVO" alias="searchVO"/>
+		<typeAlias type="member.MemberVO" alias="memberVO"/>
 		<typeAlias type="board.BoardVO" alias="boardVO"/>
 	</typeAliases>
 	<environments default="development">
