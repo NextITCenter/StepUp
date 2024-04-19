@@ -8,7 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
 
 /**
  * controller 역할
@@ -19,9 +20,9 @@ public class InsertServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		ServletContext context = getServletContext();
-		DataSource dataSource = (DataSource) context.getAttribute("dataSource");
-		service = new BoardService(dataSource);
+        ServletContext context = getServletContext();
+        SqlSession sqlSession = (SqlSession) context.getAttribute("sqlSession");
+        service = new BoardService(sqlSession);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

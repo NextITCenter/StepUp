@@ -1,6 +1,6 @@
 package board;
 
-import member.MemberVO;
+import java.io.IOException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,10 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.sql.*;
-import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 
 @WebServlet("/board/view")
 public class ViewServlet extends HttpServlet {
@@ -20,8 +18,8 @@ public class ViewServlet extends HttpServlet {
     @Override
     public void init() {
         ServletContext context = getServletContext();
-        DataSource dataSource = (DataSource) context.getAttribute("dataSource");
-        service = new BoardService(dataSource);
+        SqlSession sqlSession = (SqlSession) context.getAttribute("sqlSession");
+        service = new BoardService(sqlSession);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

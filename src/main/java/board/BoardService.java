@@ -2,12 +2,12 @@ package board;
 
 import java.util.List;
 
-import javax.sql.DataSource;
+import org.apache.ibatis.session.SqlSession;
 
 public class BoardService {
-	BoardDAO dao;
-	public BoardService(DataSource dataSource) {
-		this.dao = new BoardDAO(dataSource); 
+	private final BoardDAO dao;
+	public BoardService(SqlSession session) {
+		this.dao = new BoardDAO(session);
 	}
 	public List<BoardVO> getBoardList() {
 		return dao.getBoardList();
