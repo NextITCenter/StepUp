@@ -3,6 +3,8 @@ package common;
 public class SearchVO {
 	private String searchType;
 	private String searchWord;
+	private int firstRecordIndex;
+	private int lastRecordIndex;
 	public SearchVO() {
 	}
 	public SearchVO(String searchType, String searchWord) {
@@ -21,9 +23,21 @@ public class SearchVO {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
+	public int getFirstRecordIndex() {
+		return firstRecordIndex;
+	}
+	public void setFirstRecordIndex(int firstRecordIndex) {
+		this.firstRecordIndex = firstRecordIndex;
+	}
+	public int getLastRecordIndex() {
+		return lastRecordIndex;
+	}
+	public void setLastRecordIndex(int lastRecordIndex) {
+		this.lastRecordIndex = lastRecordIndex;
+	}
 	@Override
 	public String toString() {
-		return "SearchVO [searchType=" + searchType + ", searchWord=" + searchWord + "]";
+		return "SearchVO [searchType=" + searchType + ", searchWord=" + searchWord + ", firstRecordIndex="
+				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex + "]";
 	}
-	
 }

@@ -11,6 +11,9 @@ public class BoardService {
 	public BoardService(SqlSession session) {
 		this.mapper = session.getMapper(BoardMapper.class);
 	}
+	public int getBoardListCount(SearchVO vo) {
+		return mapper.getBoardListCount(vo);
+	}
 	public List<BoardVO> getBoardList(SearchVO vo) {
 		return mapper.getBoardList(vo);
 	}

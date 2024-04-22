@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board.BoardMapper">
-	<select id="getBoardList" parameterType="searchVO" resultType="boardVO">
+	<select id="getBoardListCount" parameterType="searchVO" resultType="int">
 		select
-			a.no,
-			b.name writer,
-			a.title,
-			a.create_date,
-			a.hits
+			count(*) cnt
 		from
 			board a
 			inner join member b on a.writer = b.id
@@ -22,7 +18,36 @@
 				b.name like '%' || #{searchWord} || '%'
 			</if>
 		</where>
-		order by a.create_date desc
+	</select>
+	<select id="getBoardList" parameterType="searchVO" resultType="boardVO">
+		select
+			*
+		from
+			(
+				select
+					rownum rnum,
+					a.no,
+					b.name writer,
+					a.title,
+					a.create_date,
+					a.hits
+				from
+					board a
+					inner join member b on a.writer = b.id
+				<where>
+					<if test="searchType == 'title'">
+						title like '%' || #{searchWord} || '%'
+					</if>
+					<if test="searchType == 'content'">
+						content like '%' || #{searchWord} || '%'
+					</if>
+					<if test="searchType == 'writer'">
+						b.name like '%' || #{searchWord} || '%'
+					</if>
+				</where>
+				)
+		where rnum between #{firstRecordIndex} and #{lastRecordIndex}
+		order by create_date desc
 	</select>
 	<select id="getBoard" parameterType="int" resultType="boardVO">
 		select
