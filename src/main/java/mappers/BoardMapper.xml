@@ -23,9 +23,13 @@
 		select
 			*
 		from
-			(
+		(
+			select
+				rownum rnum,
+				c.*
+			from
+			(					
 				select
-					rownum rnum,
 					a.no,
 					b.name writer,
 					a.title,
@@ -45,9 +49,11 @@
 						b.name like '%' || #{searchWord} || '%'
 					</if>
 				</where>
-			)
+				order by a.create_date desc
+			) c
+		)
 		where rnum between #{firstRecordIndex} + 1 and #{lastRecordIndex}
-		order by create_date desc
+
 	</select>
 	<select id="getBoard" parameterType="int" resultType="boardVO">
 		select
