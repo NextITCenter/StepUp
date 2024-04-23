@@ -3,6 +3,10 @@
 	"https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource="db.properties"></properties>
+	<settings>
+		<setting name="logImpl" value="LOG4J2"/>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
 	<typeAliases>
 		<typeAlias type="common.SearchVO" alias="searchVO"/>
 		<typeAlias type="member.MemberVO" alias="memberVO"/>
