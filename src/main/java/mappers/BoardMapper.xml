@@ -45,8 +45,8 @@
 						b.name like '%' || #{searchWord} || '%'
 					</if>
 				</where>
-				)
-		where rnum between #{firstRecordIndex} and #{lastRecordIndex}
+			)
+		where rnum between #{firstRecordIndex} + 1 and #{lastRecordIndex}
 		order by create_date desc
 	</select>
 	<select id="getBoard" parameterType="int" resultType="boardVO">
