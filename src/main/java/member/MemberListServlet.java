@@ -19,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 
+import common.PaginationInfo;
+import common.SearchVO;
+
 /**
  * Servlet implementation class MemberListServlet
  */
@@ -35,9 +38,24 @@ public class MemberListServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<MemberVO> list = service.getMemberList();
+		String pageNo = request.getParameter("currentPageNo");
+		int currentPageNo = pageNo == null ? 1 : Integer.parseInt(pageNo);
+		
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setPageSize(5);
+		paginationInfo.setRecordCountPerPage(10);
+		paginationInfo.setCurrentPageNo(currentPageNo);
+		SearchVO vo = new SearchVO();
+		vo.setFirstRecordIndex(paginationInfo.getFirstRecordIndex());
+		vo.setLastRecordIndex(paginationInfo.getLastRecordIndex());
+		
+		int totalCount = service.getMembersTotalCount();
+		paginationInfo.setTotalRecordCount(totalCount);
+		List<MemberVO> list = service.getMemberList(vo);
+		
 		// request에 회원목록 데이터를 보관한다.
 		request.setAttribute("members", list);
+		request.setAttribute("pagination", paginationInfo);
 		request.getRequestDispatcher("/WEB-INF/views/member/list.jsp").forward(request, response);
 	}
 
